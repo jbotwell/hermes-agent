@@ -1737,7 +1737,9 @@ all = [
     { name = "dingtalk-stream" },
     { name = "discord-py", extra = ["voice"] },
     { name = "elevenlabs" },
+    { name = "fastapi" },
     { name = "faster-whisper" },
+    { name = "hindsight-client" },
     { name = "honcho-ai" },
     { name = "lark-oapi" },
     { name = "markdown", marker = "sys_platform == 'linux'" },
@@ -1756,6 +1758,7 @@ all = [
     { name = "slack-bolt" },
     { name = "slack-sdk" },
     { name = "sounddevice" },
+    { name = "uvicorn", extra = ["standard"] },
 ]
 cli = [
     { name = "simple-term-menu" },
@@ -1778,6 +1781,9 @@ dingtalk = [
 ]
 feishu = [
     { name = "lark-oapi" },
+]
+hindsight = [
+    { name = "hindsight-client" },
 ]
 homeassistant = [
     { name = "aiohttp" },
@@ -1842,6 +1848,10 @@ voice = [
     { name = "numpy" },
     { name = "sounddevice" },
 ]
+web = [
+    { name = "fastapi" },
+    { name = "uvicorn", extra = ["standard"] },
+]
 yc-bench = [
     { name = "yc-bench", marker = "python_full_version >= '3.12'" },
 ]
@@ -1866,6 +1876,7 @@ requires-dist = [
     { name = "exa-py", specifier = ">=2.9.0,<3" },
     { name = "fal-client", specifier = ">=0.13.1,<1" },
     { name = "fastapi", marker = "extra == 'rl'", specifier = ">=0.104.0,<1" },
+    { name = "fastapi", marker = "extra == 'web'", specifier = ">=0.104.0,<1" },
     { name = "faster-whisper", marker = "extra == 'voice'", specifier = ">=1.0.0,<2" },
     { name = "fire", specifier = ">=0.7.1,<1" },
     { name = "firecrawl-py", specifier = ">=4.16.0,<5" },
@@ -1879,6 +1890,7 @@ requires-dist = [
     { name = "hermes-agent", extras = ["dev"], marker = "extra == 'all'" },
     { name = "hermes-agent", extras = ["dingtalk"], marker = "extra == 'all'" },
     { name = "hermes-agent", extras = ["feishu"], marker = "extra == 'all'" },
+    { name = "hermes-agent", extras = ["hindsight"], marker = "extra == 'all'" },
     { name = "hermes-agent", extras = ["homeassistant"], marker = "extra == 'all'" },
     { name = "hermes-agent", extras = ["honcho"], marker = "extra == 'all'" },
     { name = "hermes-agent", extras = ["honcho"], marker = "extra == 'termux'" },
@@ -1894,6 +1906,8 @@ requires-dist = [
     { name = "hermes-agent", extras = ["sms"], marker = "extra == 'all'" },
     { name = "hermes-agent", extras = ["tts-premium"], marker = "extra == 'all'" },
     { name = "hermes-agent", extras = ["voice"], marker = "extra == 'all'" },
+    { name = "hermes-agent", extras = ["web"], marker = "extra == 'all'" },
+    { name = "hindsight-client", marker = "extra == 'hindsight'", specifier = ">=0.4.22,<1" },
     { name = "honcho-ai", marker = "extra == 'honcho'", specifier = ">=2.0.1,<3" },
     { name = "httpx", extras = ["socks"], specifier = ">=0.28.1,<1" },
     { name = "jinja2", specifier = ">=3.1.5,<4" },
@@ -1929,10 +1943,11 @@ requires-dist = [
     { name = "tenacity", specifier = ">=9.1.4,<10" },
     { name = "tinker", marker = "extra == 'rl'", git = "https://github.com/thinking-machines-lab/tinker.git" },
     { name = "uvicorn", extras = ["standard"], marker = "extra == 'rl'", specifier = ">=0.24.0,<1" },
+    { name = "uvicorn", extras = ["standard"], marker = "extra == 'web'", specifier = ">=0.24.0,<1" },
     { name = "wandb", marker = "extra == 'rl'", specifier = ">=0.15.0,<1" },
     { name = "yc-bench", marker = "python_full_version >= '3.12' and extra == 'yc-bench'", git = "https://github.com/collinear-ai/yc-bench.git" },
 ]
-provides-extras = ["modal", "daytona", "dev", "messaging", "cron", "slack", "matrix", "cli", "tts-premium", "voice", "pty", "honcho", "mcp", "homeassistant", "sms", "acp", "mistral", "termux", "dingtalk", "feishu", "rl", "yc-bench", "all"]
+provides-extras = ["modal", "daytona", "dev", "messaging", "cron", "slack", "matrix", "cli", "tts-premium", "voice", "pty", "honcho", "mcp", "homeassistant", "sms", "hindsight", "acp", "mistral", "termux", "dingtalk", "feishu", "web", "rl", "yc-bench", "all"]
 
 [[package]]
 name = "hf-transfer"
@@ -1996,6 +2011,23 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/08/9c/b667098a636a88358dbeb2caf90e3cb9e4b961f61f6c55bb312793424def/hf_xet-1.3.1-cp37-abi3-musllinux_1_2_x86_64.whl", hash = "sha256:e5063789c9d21f51e9ed4edbee8539655d3486e9cad37e96b7af967da20e8b16", size = 4395743, upload-time = "2026-02-25T00:57:52.783Z" },
     { url = "https://files.pythonhosted.org/packages/70/37/4db0e4e1534270800cfffd5a7e0b338f2137f8ceb5768000147650d34ea9/hf_xet-1.3.1-cp37-abi3-win_amd64.whl", hash = "sha256:607d5bbc2730274516714e2e442a26e40e3330673ac0d0173004461409147dee", size = 3638145, upload-time = "2026-02-25T00:58:02.167Z" },
     { url = "https://files.pythonhosted.org/packages/4e/46/1ba8d36f8290a4b98f78898bdce2b0e8fe6d9a59df34a1399eb61a8d877f/hf_xet-1.3.1-cp37-abi3-win_arm64.whl", hash = "sha256:851b1be6597a87036fe7258ce7578d5df3c08176283b989c3b165f94125c5097", size = 3500490, upload-time = "2026-02-25T00:58:00.667Z" },
+]
+
+[[package]]
+name = "hindsight-client"
+version = "0.5.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "aiohttp" },
+    { name = "aiohttp-retry" },
+    { name = "pydantic" },
+    { name = "python-dateutil" },
+    { name = "typing-extensions" },
+    { name = "urllib3" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/05/4b/c34f7bc133e50f6b96844d354e42e57a6886762cc1971bc436f01445c0b2/hindsight_client-0.5.0.tar.gz", hash = "sha256:a0aad01feac0a3e6575c3e8fa5d1aa92de009dab537f4378979c4286db48a226", size = 94161, upload-time = "2026-04-08T15:57:52.617Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/a7/14/bacc5ad3366ab71f8817f80ebc10730292476ee02e4c1fec713143476fd7/hindsight_client-0.5.0-py3-none-any.whl", hash = "sha256:1b5a8694e9496c71d0529a8990eae8166904f29ce06b749ccd457b31c2e42e66", size = 237267, upload-time = "2026-04-08T15:57:50.978Z" },
 ]
 
 [[package]]
