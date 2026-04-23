@@ -53,6 +53,7 @@ voice = [
   "sounddevice>=0.4.6,<1",
   "numpy>=1.24.0,<3",
 ]
+voice-channel = ["opuslib>=3.0.1"]
 pty = [
   "ptyprocess>=0.7.0,<1; sys_platform != 'win32'",
   "pywinpty>=2.0.0,<3; sys_platform == 'win32'",
@@ -107,6 +108,7 @@ all = [
   "hermes-agent[sms]",
   "hermes-agent[acp]",
   "hermes-agent[voice]",
+  "hermes_agent[voice-channel]",
   "hermes-agent[dingtalk]",
   "hermes-agent[feishu]",
   "hermes-agent[mistral]",
